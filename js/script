@@ -1,1 +1,65 @@
+// Work Survival Guide interactions
 
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const targetId = link.getAttribute("href").slice(1);
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+// Copy log template button
+const copyLogBtn = document.querySelector("[data-copy-log]");
+if (copyLogBtn) {
+  copyLogBtn.addEventListener("click", () => {
+    const template = `
+Date:
+People:
+Event (facts, not feelings):
+Impact on work/health:
+Follow-up (who you told, when, how):`;
+    navigator.clipboard
+      .writeText(template.trim())
+      .then(() => {
+        copyLogBtn.textContent = "Copied!";
+        setTimeout(() => (copyLogBtn.textContent = "Copy log template"), 1500);
+      })
+      .catch(() => {
+        alert("Could not copy. You can still select and copy manually.");
+      });
+  });
+}
+
+// Copy any template <pre> with data-template
+document.querySelectorAll("[data-copy-template]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const container = btn.closest(".template-card");
+    if (!container) return;
+    const pre = container.querySelector("[data-template]");
+    if (!pre) return;
+
+    const text = pre.textContent.replace(/\u00a0/g, " "); // non-breaking spaces
+    navigator.clipboard
+      .writeText(text.trim())
+      .then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(() => (btn.textContent = "Copy"), 1500);
+      })
+      .catch(() => {
+        alert("Could not copy. You can still select and copy manually.");
+      });
+  });
+});
+
+// Simple FAQ toggle
+document.querySelectorAll("[data-faq]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const item = btn.closest(".faq-item");
+    const answer = item?.querySelector(".faq-answer");
+    if (!answer) return;
+    answer.classList.toggle("open");
+  });
+});
