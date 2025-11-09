@@ -1,4 +1,4 @@
-// WorkShield - Workplace Survival Guide Interactions
+// Open Door Policy - Really Know Your Rights
 
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
