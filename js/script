@@ -1,4 +1,4 @@
-// Work Survival Guide interactions
+// WorkShield - Workplace Survival Guide Interactions
 
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
